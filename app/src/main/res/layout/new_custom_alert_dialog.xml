@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view"
+        android:layout_centerInParent="true"
+        android:minWidth="280dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:contentPaddingTop="16dp"
+        app:contentPaddingBottom="0dp"
+        app:contentPaddingLeft="0dp"
+        app:contentPaddingRight="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="26dp"
+                android:gravity="center"
+                android:text="Success !"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:fontFamily="@font/nexa_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="58dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="Duplicate"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:fontFamily="@font/nexa_bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_positive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_message"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="#DCDFEB"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:cornerRadius="0dp"
+                app:fontFamily="@font/nexa"
+                tools:text="OK" />
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_green_circular_checked"
+        app:civ_circle_background_color="@color/white"
+        app:civ_border_color="#FFFFFF"
+        android:elevation="4dp"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>

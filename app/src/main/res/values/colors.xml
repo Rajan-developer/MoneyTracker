@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+<!--    <color name="black">#FF000000</color>-->
+<!--    <color name="white">#FFFFFFFF</color>-->
+
+
+    <color name="colorPrimary">@color/finpos_purple</color>
+    <color name="colorPrimaryDark">@color/finpos_purple_dark</color>
+    <color name="colorAccent">@color/finpos_blue</color>
+    <color name="colorOnSurface">@color/white</color>
+
+    <color name="finpos_purple">#7178B9</color>
+    <color name="finpos_purple_dark">#5E649F</color>
+    <color name="finpos_purple_light">#C0C3E8</color>
+    <color name="finpos_blue">#7ACCEB</color>
+
+    <color name="text_grey">#6d6e71</color>
+    <color name="text_light_grey">#B9BABF</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent_white">#CCFFFFFF</color>
+    <color name="citytech_tufts_blue">#4A8ECC</color>
+    <color name="citytech_keepel">#4fbfa5</color>
+    <color name="citytech_astro_blue">#2f2e79</color>
+    <color name="citytech_baby_blue">#9ddcf9</color>
+    <color name="citytech_storm_grey">#6d6e71</color>
+    <color name="red">#D50000</color>
+    <color name="green">#29AF60</color>
+    <color name="congress_blue">#00479A</color>
+    <color name="gray_chateau">#9FAAB7</color>
+    <color name="black_alpha_6">#10000000</color>
+    <color name="outer_space">#223741</color>
+    <color name="black_alpha_7">#12000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="milky_white">#FFFEF7</color>
+    <color name="brown">#603122</color>
+</resources>
