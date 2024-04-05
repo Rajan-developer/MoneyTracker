@@ -1,4 +1,4 @@
-package com.nchl.moneytracker.presentation.utils;
+package com.nchl.moneytracker.presentation.utils.log;
 
 public class AppState {
 
