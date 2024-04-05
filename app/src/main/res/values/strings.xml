@@ -4,6 +4,11 @@
 
     <string name="title_please_wait">Please Wait …</string>
 
+    <!--bottom navigation menu-->
+    <string name="home">Home</string>
+    <string name="chart">Chart</string>
+    <string name="category">Category</string>
+    <string name="profile">Profile</string>
 
     <!--activity_register-->
     <string name="username">Name</string>

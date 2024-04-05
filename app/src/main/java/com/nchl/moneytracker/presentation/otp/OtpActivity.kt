@@ -22,6 +22,7 @@ import com.nchl.moneytracker.BR
 import com.nchl.moneytracker.R
 import com.nchl.moneytracker.databinding.ActivityOtpBinding
 import com.nchl.moneytracker.presentation.base.AppBaseActivity
+import com.nchl.moneytracker.presentation.dashboard.DashActivity
 import com.nchl.moneytracker.presentation.utils.log.Logger
 
 
@@ -183,9 +184,17 @@ class OtpActivity : AppBaseActivity<ActivityOtpBinding, OtpViewModel>() {
         } else if (getViewModel().otp.value?.length!! < 6) {
             showToast(getString(R.string.valid_digit))
         } else {
-            getViewModel().submitOtp(getViewModel().otp.value)
+            //getViewModel().submitOtp(getViewModel().otp.value)
+            navigateToDashboard()
         }
 
+    }
+
+    private fun navigateToDashboard() {
+        val intent = DashActivity.getLaunchIntent(this)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
 
