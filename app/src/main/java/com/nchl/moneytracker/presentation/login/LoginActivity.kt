@@ -10,7 +10,6 @@ import com.nchl.moneytracker.BR
 import com.nchl.moneytracker.R
 import com.nchl.moneytracker.databinding.ActivityLoginBinding
 import com.nchl.moneytracker.presentation.base.AppBaseActivity
-import com.nchl.moneytracker.presentation.otp.OtpActivity
 import com.nchl.moneytracker.presentation.register.RegisterActivity
 import com.nchl.moneytracker.presentation.utils.log.Logger
 
@@ -45,8 +44,8 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, LoginViewModel>() {
 //                binding.etEmail.text.toString(),
 //                binding.etPassword.text.toString()
 //            )
-            val intent = OtpActivity.getLaunchIntent(this)
-            startActivity(intent)
+//            val intent = OtpActivity.getLaunchIntent(this)
+//            startActivity(intent)
         }
 
         binding.tvSignUp.setOnClickListener{
