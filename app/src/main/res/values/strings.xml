@@ -24,7 +24,7 @@
     <string name="welcome_otp_text">Please Enter The OTP Send To</string>
     <string name="verify_otp">Verify</string>
     <string name="enter_code">Enter Code</string>
-    <string name="resend"><![CDATA[<u>Resend Code</u>]]></string>
+    <string name="resend">Resend Otp</string>
 
     <!--OtpActivity-->
     <string name="enter_otp">Please enter otp</string>

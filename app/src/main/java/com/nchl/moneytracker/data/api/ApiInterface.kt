@@ -1,6 +1,7 @@
 package com.nchl.moneytracker.data.api
 
 import com.nchl.moneytracker.data.model.login.LoginRequest
+import com.nchl.moneytracker.data.model.otp.OtpRequest
 import com.nchl.moneytracker.data.model.register.RegisterRequest
 import retrofit2.Call
 import retrofit2.http.Body
@@ -17,10 +18,10 @@ interface ApiInterface {
         @Body registerRequest: RegisterRequest
     ): Call<Any>
 
-//    @POST("/authentication/verifyOtp")
-//    fun verifyOtp(
-//        @Body otpRequest: OtpRequest
-//    ): Call<Any>
+    @POST("/authentication/verifyOtp")
+    fun verifyOtp(
+        @Body otpRequest: OtpRequest
+    ): Call<Any>
 
 //    @POST("/authentication/resendOtp")
 //    fun resendOtp(
