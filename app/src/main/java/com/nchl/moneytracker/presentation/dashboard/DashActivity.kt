@@ -34,12 +34,21 @@ class DashActivity : AppBaseActivity<ActivityDashBinding, DashViewModel>() {
         initObservers()
     }
 
-    private fun initViews() {
+    override fun onResume() {
+        super.onResume()
+        getViewModel().isApplicationOpenFirstTime()
+    }
 
+    private fun initViews() {
     }
 
     private fun initObservers() {
 
+        getViewModel().firstTimeAppOpen.observe(this) {
+            if (it) {
+                getViewModel().saveInitialCategoryList()
+            }
+        }
     }
 
     override fun getBindingVariable(): Int = BR.loginViewModel

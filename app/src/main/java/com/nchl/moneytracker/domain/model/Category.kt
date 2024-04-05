@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = Category.TABLE_NAME)
 data class Category(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_ID)
-    var id: String,
+    var id: Long = 0,
     @ColumnInfo(name = CATEGORY_NAME)
     var name: String? = null,
     @ColumnInfo(name = CATEGORY_TYPE)
@@ -28,13 +28,7 @@ data class Category(
 
         fun fromContentValues(values: ContentValues): Category {
             values.let {
-                val category =
-                    Category(
-                        id = values.getAsString(COLUMN_ID)
-                    )
-                if (it.containsKey(COLUMN_ID)) {
-                    category.id = it.getAsString(COLUMN_ID)
-                }
+                val category = Category()
                 if (it.containsKey(CATEGORY_NAME))
                     category.name = it.getAsString(CATEGORY_NAME)
                 if (it.containsKey(CATEGORY_TYPE))

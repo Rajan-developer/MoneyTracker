@@ -28,8 +28,10 @@ object PreferenceManager : SharedPreferenceSource {
         pref.clear()
     }
 
-    override fun isApplicationOpenFirstTime(value: Boolean) = pref.retrieveBoolean(IS_APP_RUN_FIRST_TIME, false)
+    override fun isApplicationOpenFirstTime(defaultValue: Boolean) =
+        pref.retrieveBoolean(IS_APP_RUN_FIRST_TIME, defaultValue)
 
-    override fun saveApplicationOpenFirstTime(value: Boolean) = pref.saveBoolean(IS_APP_RUN_FIRST_TIME, value)
+    override fun saveApplicationOpenFirstTime(value: Boolean) =
+        pref.saveBoolean(IS_APP_RUN_FIRST_TIME, value)
 
 }
