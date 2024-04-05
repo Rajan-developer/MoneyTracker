@@ -1,6 +1,7 @@
 package com.nchl.moneytracker.presentation.utils
 
 import android.util.Log
+import com.nchl.moneytracker.presentation.utils.log.AppState
 
 class AppLogger {
     companion object {
