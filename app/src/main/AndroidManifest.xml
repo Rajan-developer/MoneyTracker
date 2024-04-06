@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
+        android:name=".MoneyTrackerApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,7 +16,7 @@
         android:theme="@style/Theme.MoneyTracker"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.login.LoginActivity"
+            android:name=".presentation.dashboard.DashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +32,10 @@
             android:name=".presentation.otp.OtpActivity"
             android:exported="true">
         </activity>
+<!--        <activity-->
+<!--            android:name=".presentation.dashboard.DashActivity"-->
+<!--            android:exported="true">-->
+<!--        </activity>-->
     </application>
 
 </manifest>

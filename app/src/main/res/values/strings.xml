@@ -4,6 +4,11 @@
 
     <string name="title_please_wait">Please Wait …</string>
 
+    <!--bottom navigation menu-->
+    <string name="home">Home</string>
+    <string name="chart">Chart</string>
+    <string name="category">Category</string>
+    <string name="profile">Profile</string>
 
     <!--activity_register-->
     <string name="username">Name</string>
@@ -29,6 +34,11 @@
     <!--OtpActivity-->
     <string name="enter_otp">Please enter otp</string>
     <string name="valid_digit">Please enter 6 digit otp</string>
+
+    <!--edit_category_dialog-->
+    <string name="action_confirm">Confirm</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="category_name">Category Name</string>
 
 
 </resources>
