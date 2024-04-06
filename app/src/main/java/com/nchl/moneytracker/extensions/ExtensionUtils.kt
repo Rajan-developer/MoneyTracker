@@ -8,6 +8,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.google.android.material.button.MaterialButton
 import global.citytech.easydroid.core.utils.Jsons
 
 
@@ -20,4 +21,11 @@ fun Application.hasInternetConnection(): Boolean {
         }
 
     return false
+}
+
+fun MaterialButton.handleDebounce() {
+    this.isEnabled = false
+    android.os.Handler().postDelayed({
+        this.isEnabled = true
+    }, 500)
 }

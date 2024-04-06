@@ -9,5 +9,11 @@ import io.reactivex.Observable
 interface LocalRepository {
     fun getUsers(): Observable<List<User>>
     fun getCategories(): Observable<List<Category>>
+    fun getIncomeCategories(categoryType: String): Observable<List<Category>>
+    fun getExpenseCategories(categoryType: String): Observable<List<Category>>
+    fun getCategoriesByType(categoryType: String): Observable<List<Category>>
+    fun deleteCategoryById(categoryId: String): Observable<Boolean>
     fun saveCategories(categories:List<ExpenseCategory>):Observable<DatabaseReponse>
+    fun updateCategory(category:ExpenseCategory):Observable<Boolean>
+    fun addCategory(category:ExpenseCategory):Observable<Boolean>
 }

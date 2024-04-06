@@ -2,18 +2,24 @@ package com.nchl.moneytracker.presentation.dashboard
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProviders
 import com.nchl.moneytracker.BR
 import com.nchl.moneytracker.R
 import com.nchl.moneytracker.databinding.ActivityDashBinding
 import com.nchl.moneytracker.presentation.base.AppBaseActivity
+import com.nchl.moneytracker.presentation.dashboard.category.CategoryFragment
 import com.nchl.moneytracker.presentation.utils.log.Logger
 
+
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class DashActivity : AppBaseActivity<ActivityDashBinding, DashViewModel>() {
 
     private val logger = Logger(DashActivity::class.java.name)
     private lateinit var binding: ActivityDashBinding
+    private val categoryFragment: CategoryFragment  = CategoryFragment()
 
 
     companion object {
@@ -40,6 +46,26 @@ class DashActivity : AppBaseActivity<ActivityDashBinding, DashViewModel>() {
     }
 
     private fun initViews() {
+        binding.bnvDashboard.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_home -> {
+
+                }
+                R.id.menu_chart -> {
+
+                }
+                R.id.menu_category -> {
+                    openCategoryFragment()
+                }
+                R.id.menu_profile -> {
+
+                }
+                else -> {
+                    return@setOnItemSelectedListener false
+                }
+            }
+            true
+        }
     }
 
     private fun initObservers() {
@@ -49,6 +75,14 @@ class DashActivity : AppBaseActivity<ActivityDashBinding, DashViewModel>() {
                 getViewModel().saveInitialCategoryList()
             }
         }
+    }
+
+
+    private fun openCategoryFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fl_dashboard, categoryFragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     override fun getBindingVariable(): Int = BR.loginViewModel

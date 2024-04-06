@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:id="@+id/rlCategoryIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circular_background">
+
+        <TextView
+            android:id="@+id/categoryNameIndicator"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:text="R"
+            android:textSize="30sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+
+
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/categoryName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:text="Name"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/categoryEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_edit" />
+
+    <ImageView
+        android:id="@+id/categoryDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete" />
+
+</LinearLayout>

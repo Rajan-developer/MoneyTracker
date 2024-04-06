@@ -33,42 +33,15 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <!--        <RelativeLayout-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@color/colorPrimary"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent">-->
-
-        <!-- <androidx.appcompat.widget.AppCompatImageView
-             android:id="@+id/iv_back"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:padding="16dp"
-             android:src="@drawable/ic_back" />-->
-
-        <!--            <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_centerInParent="true"-->
-        <!--                android:text="@string/app_name"-->
-        <!--                android:textColor="@color/white"-->
-        <!--                android:textSize="20sp"-->
-        <!--                app:fontFamily="@font/nexa_bold" />-->
-
-        <!--        </RelativeLayout>-->
-
         <FrameLayout
-            android:id="@+id/fl_transactions"
+            android:id="@+id/fl_dashboard"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bnv_transactions"
+            app:layout_constraintBottom_toTopOf="@+id/bnv_dashboard"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bnv_transactions"
+            android:id="@+id/bnv_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemHorizontalTranslationEnabled="false"
