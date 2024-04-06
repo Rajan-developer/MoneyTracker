@@ -11,6 +11,7 @@ import com.nchl.moneytracker.R
 import com.nchl.moneytracker.databinding.ActivityDashBinding
 import com.nchl.moneytracker.presentation.base.AppBaseActivity
 import com.nchl.moneytracker.presentation.dashboard.category.CategoryFragment
+import com.nchl.moneytracker.presentation.dashboard.home.HomeFragment
 import com.nchl.moneytracker.presentation.utils.log.Logger
 
 
@@ -19,7 +20,8 @@ class DashActivity : AppBaseActivity<ActivityDashBinding, DashViewModel>() {
 
     private val logger = Logger(DashActivity::class.java.name)
     private lateinit var binding: ActivityDashBinding
-    private val categoryFragment: CategoryFragment  = CategoryFragment()
+    private val categoryFragment: CategoryFragment = CategoryFragment()
+    private val homeFragment: HomeFragment = HomeFragment()
 
 
     companion object {
@@ -46,10 +48,11 @@ class DashActivity : AppBaseActivity<ActivityDashBinding, DashViewModel>() {
     }
 
     private fun initViews() {
+        openHomeFragment()
         binding.bnvDashboard.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {
-
+                    openHomeFragment()
                 }
                 R.id.menu_chart -> {
 
@@ -81,6 +84,13 @@ class DashActivity : AppBaseActivity<ActivityDashBinding, DashViewModel>() {
     private fun openCategoryFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fl_dashboard, categoryFragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+    }
+
+    private fun openHomeFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fl_dashboard, homeFragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }

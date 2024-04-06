@@ -58,7 +58,7 @@ class CategoryFragment : AppBaseFragment(), EditCategoryDialog.EditCategoryDialo
         initializeCategoryTabName()
         getViewModel().getAllCategoryFromDbTable()
 
-        binding.viewPager.offscreenPageLimit = 2
+        //binding.viewPager.offscreenPageLimit = 2
         binding.viewPager.addOnPageChangeListener(TabLayoutOnPageChangeListener(binding.tabLayout))
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
