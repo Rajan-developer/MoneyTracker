@@ -4,11 +4,9 @@ import android.content.ContentValues
 import com.nchl.moneytracker.MoneyTrackerApplication
 import com.nchl.moneytracker.data.dataSource.db.AppDatabase
 import com.nchl.moneytracker.data.dataSource.db.LocalDatabaseSource
-import com.nchl.moneytracker.domain.model.Category
-import com.nchl.moneytracker.domain.model.DataBaseResult
-import com.nchl.moneytracker.domain.model.DatabaseReponse
-import com.nchl.moneytracker.domain.model.User
+import com.nchl.moneytracker.domain.model.*
 import com.nchl.moneytracker.presentation.model.ExpenseCategory
+import com.nchl.moneytracker.presentation.model.ExpenseTransaction
 import com.nchl.moneytracker.presentation.utils.log.Logger
 import global.citytech.easydroid.core.utils.Jsons
 import io.reactivex.Observable
@@ -127,6 +125,49 @@ class LocalDatabaseSourceImpl : LocalDatabaseSource {
 
             AppDatabase.getInstance(MoneyTrackerApplication.INSTANCE).getCategoryDao()
                 .insert(Category.fromContentValues(contentValues))
+            true
+        }
+    }
+
+
+    override fun addTransaction(transaction: ExpenseTransaction): Observable<Boolean> {
+        return Observable.fromCallable {
+            val contentValues = ContentValues()
+            contentValues.put(
+                Transaction.COLUMN_ID,
+                transaction.id
+            )
+            contentValues.put(
+                Transaction.CATEGORY_ID,
+                transaction.categoryId
+            )
+            contentValues.put(
+                Transaction.CATEGORY_NAME,
+                transaction.categoryName
+            )
+            contentValues.put(
+                Transaction.CATEGORY_TYPE,
+                transaction.categoryType
+            )
+            contentValues.put(
+                Transaction.DATE,
+                transaction.date
+            )
+            contentValues.put(
+                Transaction.TIME,
+                transaction.time
+            )
+            contentValues.put(
+                    Transaction.DESCRIPTION,
+            transaction.description
+            )
+            contentValues.put(
+                Transaction.AMOUNT,
+                transaction.transactionAmount
+            )
+
+            AppDatabase.getInstance(MoneyTrackerApplication.INSTANCE).getTransactionDao()
+                .insert(Transaction.fromContentValues(contentValues))
             true
         }
     }

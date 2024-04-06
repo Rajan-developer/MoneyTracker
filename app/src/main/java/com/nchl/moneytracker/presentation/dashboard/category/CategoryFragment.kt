@@ -23,7 +23,7 @@ import com.nchl.moneytracker.presentation.model.ExpenseCategory
 class CategoryFragment : AppBaseFragment(), EditCategoryDialog.EditCategoryDialogListener {
 
     private lateinit var binding: FragmentCategoryBinding
-    private val tabArray: ArrayList<String> = arrayListOf()
+    private var tabArray: ArrayList<String> = arrayListOf()
     private lateinit var editCategoryDialog: EditCategoryDialog
 
     override fun getLayoutId(): Int = R.layout.fragment_category
@@ -90,6 +90,7 @@ class CategoryFragment : AppBaseFragment(), EditCategoryDialog.EditCategoryDialo
     }
 
     private fun initializeCategoryTabName() {
+        tabArray = arrayListOf()
         tabArray.add("Expense")
         tabArray.add("Income")
     }

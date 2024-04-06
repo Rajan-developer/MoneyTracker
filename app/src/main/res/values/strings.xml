@@ -40,5 +40,10 @@
     <string name="action_cancel">Cancel</string>
     <string name="category_name">Category Name</string>
 
+    <!--activity_transaction_detail-->
+    <string name="select_category">Select category</string>
+    <string name="transaction_amount">Transaction Amount</string>
+    <string name="remark">Remark</string>
+
 
 </resources>

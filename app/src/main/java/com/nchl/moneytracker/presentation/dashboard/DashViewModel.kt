@@ -18,7 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+@RequiresApi(Build.VERSION_CODES.O)
 class DashViewModel(private val context: Application) : BaseAndroidViewModel(context) {
 
     private val TAG = Logger(LoginViewModel::class.java.name).toString()

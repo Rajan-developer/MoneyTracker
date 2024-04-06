@@ -55,13 +55,13 @@ class DashActivity : AppBaseActivity<ActivityDashBinding, DashViewModel>() {
                     openHomeFragment()
                 }
                 R.id.menu_chart -> {
-
+                    openCategoryFragment()
                 }
                 R.id.menu_category -> {
                     openCategoryFragment()
                 }
                 R.id.menu_profile -> {
-
+                    openCategoryFragment()
                 }
                 else -> {
                     return@setOnItemSelectedListener false

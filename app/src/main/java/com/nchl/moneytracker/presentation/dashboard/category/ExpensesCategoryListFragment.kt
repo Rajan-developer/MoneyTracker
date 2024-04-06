@@ -16,7 +16,7 @@ import com.nchl.moneytracker.presentation.dashboard.DashViewModel
 import com.nchl.moneytracker.presentation.model.ExpenseCategory
 
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+@RequiresApi(Build.VERSION_CODES.O)
 class ExpensesCategoryListFragment : AppBaseFragment(), CategoryListAdapter.Listener,EditCategoryDialog.EditCategoryDialogListener {
 
 

@@ -7,6 +7,7 @@ import com.nchl.moneytracker.domain.model.DatabaseReponse
 import com.nchl.moneytracker.domain.model.User
 import com.nchl.moneytracker.domain.repository.LocalRepository
 import com.nchl.moneytracker.presentation.model.ExpenseCategory
+import com.nchl.moneytracker.presentation.model.ExpenseTransaction
 import io.reactivex.Observable
 
 
@@ -23,4 +24,5 @@ class LocalRepositoryImpl(
     override fun saveCategories(categories:List<ExpenseCategory>): Observable<DatabaseReponse>  = localDatabaseSource.saveCategories(categories)
     override fun updateCategory(category:ExpenseCategory): Observable<Boolean>  = localDatabaseSource.updateCategory(category)
     override fun addCategory(category:ExpenseCategory): Observable<Boolean>  = localDatabaseSource.addCategory(category)
+    override fun addTransaction(transaction: ExpenseTransaction): Observable<Boolean>  = localDatabaseSource.addTransaction(transaction)
 }

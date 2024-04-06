@@ -11,11 +11,11 @@ import com.nchl.moneytracker.R
 import com.nchl.moneytracker.databinding.FragmentHomeBinding
 import com.nchl.moneytracker.presentation.base.AppBaseFragment
 import com.nchl.moneytracker.presentation.dashboard.DashViewModel
+import com.nchl.moneytracker.presentation.model.ExpenseTransaction
 
 
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-class HomeFragment: AppBaseFragment() {
+@RequiresApi(Build.VERSION_CODES.O)
+class HomeFragment : AppBaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -47,7 +47,18 @@ class HomeFragment: AppBaseFragment() {
     }
 
     private fun initViews() {
+        binding.btnAddTransaction.setOnClickListener {
+            navigateToTransactionDetail()
+        }
+    }
 
+    private fun navigateToTransactionDetail() {
+        val intent =
+            TransactionDetailActivity.getLaunchIntent(
+                requireContext(), "Add Transaction", ExpenseTransaction(),
+                false
+            )
+        startActivity(intent)
     }
 
 

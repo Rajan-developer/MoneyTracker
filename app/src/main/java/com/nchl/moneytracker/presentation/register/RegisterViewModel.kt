@@ -1,7 +1,9 @@
 package com.nchl.moneytracker.presentation.register
 
 import android.app.Application
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import com.nchl.moneytracker.data.api.ApiClient
 import com.nchl.moneytracker.data.api.ApiConstants
@@ -25,10 +27,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@RequiresApi(Build.VERSION_CODES.O)
 class RegisterViewModel(private val context: Application) : BaseAndroidViewModel(context) {
 
     private val TAG = Logger(RegisterViewModel::class.java.name).toString()
     val registerProcessStart by lazy { MutableLiveData<Boolean>() }
+
 
     fun validateRegisterCredential(
         username: String,

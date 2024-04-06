@@ -4,6 +4,7 @@ import com.nchl.moneytracker.domain.model.Category
 import com.nchl.moneytracker.domain.model.DatabaseReponse
 import com.nchl.moneytracker.domain.model.User
 import com.nchl.moneytracker.presentation.model.ExpenseCategory
+import com.nchl.moneytracker.presentation.model.ExpenseTransaction
 import io.reactivex.Observable
 
 interface LocalDatabaseSource {
@@ -16,4 +17,5 @@ interface LocalDatabaseSource {
     fun saveCategories(categories:List<ExpenseCategory>): Observable<DatabaseReponse>
     fun updateCategory(categories:ExpenseCategory): Observable<Boolean>
     fun addCategory(categories:ExpenseCategory): Observable<Boolean>
+    fun addTransaction(transaction: ExpenseTransaction): Observable<Boolean>
 }
