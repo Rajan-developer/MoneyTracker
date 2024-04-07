@@ -1,9 +1,8 @@
 package com.nchl.moneytracker.domain.usecase
 
-import com.nchl.moneytracker.domain.model.Category
-import com.nchl.moneytracker.domain.model.DatabaseReponse
-import com.nchl.moneytracker.domain.model.User
+import com.nchl.moneytracker.domain.model.*
 import com.nchl.moneytracker.domain.repository.LocalRepository
+import com.nchl.moneytracker.presentation.model.CategorySum
 import com.nchl.moneytracker.presentation.model.ExpenseCategory
 import com.nchl.moneytracker.presentation.model.ExpenseTransaction
 import io.reactivex.Observable
@@ -20,4 +19,9 @@ class LocalDataUseCase(private val localRepository: LocalRepository) {
      fun updateCategory(category:ExpenseCategory): Observable<Boolean>  = localRepository.updateCategory(category)
      fun addCategory(category:ExpenseCategory): Observable<Boolean>  = localRepository.addCategory(category)
      fun addTransaction(transaction: ExpenseTransaction): Observable<Boolean>  = localRepository.addTransaction(transaction)
+     fun updateTransactionById(transaction: ExpenseTransaction): Observable<Boolean>  = localRepository.updateTransactionById(transaction)
+     fun deleteTransactionByID(transaction: ExpenseTransaction): Observable<Boolean>  = localRepository.deleteTransactionByID(transaction)
+     fun getTransactionByDate(transactionDate: String): Observable<List<Transaction>>  = localRepository.getTransactionByDate(transactionDate)
+     fun getTotalIncomeByDate(transactionDate: String, categoryType: String): Observable<Double>  = localRepository.getTotalIncomeByDate(transactionDate,categoryType)
+     fun getTransactionSumByCategory(transactionDate: String, categoryType: String): Observable<List<CategorySum>>  = localRepository.getTransactionSumByCategory(transactionDate,categoryType)
 }

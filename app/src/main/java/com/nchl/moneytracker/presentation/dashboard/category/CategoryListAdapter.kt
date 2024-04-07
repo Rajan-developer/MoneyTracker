@@ -3,9 +3,6 @@ package com.nchl.moneytracker.presentation.dashboard.category
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.OvalShape
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +12,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nchl.moneytracker.R
 import com.nchl.moneytracker.presentation.model.ExpenseCategory
-import kotlin.random.Random
+import com.nchl.moneytracker.presentation.utils.AppUtility.getRandomColor
+
 
 class CategoryListAdapter(
     private var categories: MutableList<ExpenseCategory>,
@@ -70,8 +68,8 @@ class CategoryListAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateAll(mobileNfcPayments: MutableList<ExpenseCategory>) {
-        this.categories = mobileNfcPayments
+    fun updateAll(categories: MutableList<ExpenseCategory>) {
+        this.categories = categories
         notifyDataSetChanged()
     }
 
@@ -89,17 +87,6 @@ class CategoryListAdapter(
                 null
             }
         }
-    }
-
-
-    private fun getRandomColor(): Int {
-        // Generate random RGB values for the color
-        val r = Random.nextInt(256)
-        val g = Random.nextInt(256)
-        val b = Random.nextInt(256)
-
-        // Combine RGB values into a single color integer
-        return Color.rgb(r, g, b)
     }
 
 }

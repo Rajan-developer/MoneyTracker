@@ -6,7 +6,7 @@
 
         <variable
             name="transacctionDetailViewModel"
-            type="com.nchl.moneytracker.presentation.dashboard.home.TransactionDetailViewModel" />
+            type="com.nchl.moneytracker.presentation.dashboard.transaction.TransactionDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,6 +40,16 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/iv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@color/tracker_green"
+                android:padding="8dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_white_delete" />
 
 
         </androidx.appcompat.widget.Toolbar>

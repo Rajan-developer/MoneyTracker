@@ -33,7 +33,7 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".presentation.dashboard.home.TransactionDetailActivity"
+            android:name=".presentation.dashboard.transaction.TransactionDetailActivity"
             android:exported="true">
         </activity>
 <!--        <activity-->

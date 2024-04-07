@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/expensePieChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:text="Sorry, No data"
+                android:id="@+id/pieChart_no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+        </RelativeLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"></Space>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:text="Sorry, No data"
+                android:id="@+id/barchart_no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/expenseBarGraph"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

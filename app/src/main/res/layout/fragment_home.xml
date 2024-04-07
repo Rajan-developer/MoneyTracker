@@ -29,6 +29,7 @@
         android:paddingHorizontal="16dp">
 
         <LinearLayout
+            android:id="@+id/layout_date_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -220,6 +221,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_wallet_amount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_wallet_balance"
@@ -249,6 +251,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_transaction_count"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_total_transaction"
@@ -280,6 +283,7 @@
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search_transaction"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/transaction_list_item"></androidx.recyclerview.widget.RecyclerView>

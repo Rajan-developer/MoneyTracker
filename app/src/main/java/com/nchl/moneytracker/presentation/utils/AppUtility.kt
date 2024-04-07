@@ -3,6 +3,7 @@ package com.nchl.moneytracker.presentation.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -14,6 +15,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.util.*
+import kotlin.random.Random
 
 @RequiresApi(Build.VERSION_CODES.O)
 object AppUtility {
@@ -58,6 +60,16 @@ object AppUtility {
         return bitmap
     }
 
+     fun getRandomColor(): Int {
+        // Generate random RGB values for the color
+        val r = Random.nextInt(256)
+        val g = Random.nextInt(256)
+        val b = Random.nextInt(256)
+
+        // Combine RGB values into a single color integer
+        return Color.rgb(r, g, b)
+    }
+
     fun getCurrentDate(): String {
         val calendar = Calendar.getInstance()
         val year = calendar[Calendar.YEAR]
@@ -67,15 +79,20 @@ object AppUtility {
     }
 
 
-    fun getCurrentTime():String{
-        val currentTime: LocalTime = LocalTime.now()
-        return currentTime.toString()
+    fun getCurrentTime(): String {
+        return try {
+            val currentTime: LocalTime = LocalTime.now()
+            currentTime.toString()
+        } catch (e: Exception) {
+            e.printStackTrace() // Log the exception for debugging
+            "Error occurred while getting current time" // Return a default value or error message
+        }
     }
 
     fun convertDateToDisplayDate(date: String): String {
         var convertedDate = ""
         val inputDateFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
-       // val outputDateFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        // val outputDateFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
         val outputDateFormat = SimpleDateFormat("MMM yyyy", Locale.ENGLISH)
 
         try {
@@ -84,6 +101,7 @@ object AppUtility {
             convertedDate = outputDateStr
         } catch (e: ParseException) {
             e.printStackTrace()
+            convertedDate = dateFromDbToDisplayFormat(date,"MMMM yyyy")
         }
         return convertedDate
     }
@@ -102,5 +120,37 @@ object AppUtility {
             e.printStackTrace()
         }
         return convertedTime;
+    }
+
+
+    fun dateStringToLong(dateString: String): Long {
+        val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.getDefault())
+        try {
+            val date = dateFormat.parse(dateString)
+            return date?.time ?: 0L
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return 0L
+    }
+
+    fun stringToDate(dateString: String, format: String): Date {
+        val formatter = SimpleDateFormat(format, Locale.getDefault())
+        var date = formatter.parse(dateString)
+        return date ?: Date()
+    }
+
+    fun dateFromDbToDisplayFormat(inputDateString: String, outputFormatter: String): String {
+        val inputDateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.getDefault())
+        val outputDateFormat = SimpleDateFormat(outputFormatter, Locale.getDefault())
+
+        try {
+            val date = inputDateFormat.parse(inputDateString)
+            return outputDateFormat.format(date)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return ""
     }
 }

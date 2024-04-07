@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.nchl.moneytracker.data.dataSource.db.dao.CategoryDao
+import com.nchl.moneytracker.data.dataSource.db.dao.Converters
 import com.nchl.moneytracker.data.dataSource.db.dao.TransactionDao
 import com.nchl.moneytracker.data.dataSource.db.dao.UsersDao
 import com.nchl.moneytracker.domain.model.Category
@@ -17,6 +19,7 @@ import com.nchl.moneytracker.domain.model.User
     version = 1,
     exportSchema = true
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getUserDao(): UsersDao
     abstract fun getCategoryDao(): CategoryDao

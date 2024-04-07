@@ -1,10 +1,16 @@
 package com.nchl.moneytracker.domain.model
 
 import android.content.ContentValues
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.nchl.moneytracker.presentation.utils.AppUtility
+import java.text.SimpleDateFormat
+import java.util.*
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Entity(tableName = Transaction.TABLE_NAME)
 data class Transaction(
     @PrimaryKey(autoGenerate = true)
@@ -19,14 +25,12 @@ data class Transaction(
     @ColumnInfo(name = DESCRIPTION)
     var description: String? = null,
     @ColumnInfo(name = AMOUNT)
-    var amount: String? = null,
+    var amount: Double? = null,
     @ColumnInfo(name = DATE)
-    var date: String? = null,
+    var date: Date? = null,
     @ColumnInfo(name = TIME)
     var time: String? = null,
-
-
-    ) {
+) {
 
     companion object {
         const val TABLE_NAME = "transactions"
@@ -52,14 +56,29 @@ data class Transaction(
                 if (it.containsKey(DESCRIPTION))
                     transaction.description = it.getAsString(DESCRIPTION)
                 if (it.containsKey(DESCRIPTION))
-                    transaction.amount = it.getAsString(AMOUNT)
+                    transaction.amount = it.getAsString(AMOUNT).toDouble()
                 if (it.containsKey(DATE))
-                    transaction.date = it.getAsString(DATE)
+                    transaction.date = stringToDate(it.getAsString(DATE), "d/M/yyyy")
                 if (it.containsKey(TIME))
                     transaction.time = it.getAsString(TIME)
 
                 return transaction
             }
+        }
+
+
+        fun stringToDate(dateString: String, format: String): Date {
+            println("Original date : " + dateString)
+            val formatter = SimpleDateFormat(format, Locale.getDefault())
+            var date: Date
+            try {
+                date = formatter.parse(dateString)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                date = AppUtility.stringToDate(dateString, "EEE MMM dd HH:mm:ss zzz yyyy")
+            }
+            println("Converted date : " + date)
+            return date
         }
 
     }

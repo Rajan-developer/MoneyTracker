@@ -1,4 +1,4 @@
-package com.nchl.moneytracker.presentation.dashboard.home
+package com.nchl.moneytracker.presentation.dashboard.transaction
 
 import android.app.Application
 import android.os.Build
@@ -28,6 +28,7 @@ class TransactionDetailViewModel(private val context: Application) : BaseAndroid
     val selectableCategory by lazy { MutableLiveData<MutableList<ExpenseCategory>>() }
     val selectedCategoryName = MutableLiveData<String>()
     val isTransactionInserted = MutableLiveData<Boolean>()
+    val isTransactionUpdate = MutableLiveData<Boolean>()
     var localDataUseCase: LocalDataUseCase = LocalDataUseCase(
         LocalRepositoryImpl(
             LocalDatabaseSourceImpl(),
@@ -38,13 +39,13 @@ class TransactionDetailViewModel(private val context: Application) : BaseAndroid
     fun setSelectedCategoryType(categoryType: String = "0") {
         selectedExpenseCategoryType.value = categoryType
         expenseTransaction.value?.categoryType = selectedExpenseCategoryType.value
-        expenseTransaction.value?.categoryName = ""
+        //expenseTransaction.value?.categoryName = ""
     }
 
     fun setSelectedDate(date: String = "") {
         var dateValue = ""
         dateValue = if (date.isNullOrEmpty() || date.isBlank()) {
-            AppUtility.getCurrentDate();
+            AppUtility.getCurrentDate()
         } else {
             date
         }
@@ -94,6 +95,7 @@ class TransactionDetailViewModel(private val context: Application) : BaseAndroid
         )
     }
 
+
     fun setSelectedCategory(category: ExpenseCategory) {
         expenseTransaction.value?.categoryId = category.id
         expenseTransaction.value?.categoryName = category.name
@@ -104,7 +106,8 @@ class TransactionDetailViewModel(private val context: Application) : BaseAndroid
     fun validateALlTransactionField(
         categoryName: String,
         transactionAmount: String,
-        remark: String
+        remark: String,
+        isEditing: Boolean
     ) {
         if (categoryName.isNullOrEmpty()) {
             context.showToast("Select Category")
@@ -112,10 +115,15 @@ class TransactionDetailViewModel(private val context: Application) : BaseAndroid
             context.showToast("Enter transaction Amount")
         } else if (remark.isNullOrEmpty()) {
             context.showToast("Please enter remark")
-        }else{
+        } else {
             expenseTransaction.value?.transactionAmount = transactionAmount
             expenseTransaction.value?.description = remark
-            expenseTransaction.value?.let { addTransaction(it) }
+            if (isEditing) {
+                expenseTransaction.value?.let { updateTransactionById(it) }
+            } else {
+                expenseTransaction.value?.let { addTransaction(it) }
+            }
+
 
         }
     }
@@ -124,6 +132,44 @@ class TransactionDetailViewModel(private val context: Application) : BaseAndroid
     private fun addTransaction(transaction: ExpenseTransaction) {
         this.compositeDisposable.add(
             this.localDataUseCase.addTransaction(transaction)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        isLoading.value = false
+                        isTransactionInserted.value = true
+                    },
+                    {
+                        isLoading.value = false
+                        Logger.getLogger(TAG)
+                            .debug("Category insert ${it.message}................")
+                    }
+                )
+        )
+    }
+
+    private fun updateTransactionById(transaction: ExpenseTransaction) {
+        this.compositeDisposable.add(
+            this.localDataUseCase.updateTransactionById(transaction)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        isLoading.value = false
+                        isTransactionUpdate.value = true
+                    },
+                    {
+                        isLoading.value = false
+                        Logger.getLogger(TAG)
+                            .debug("Category insert ${it.message}................")
+                    }
+                )
+        )
+    }
+
+    fun deleteTransactionByID(transaction: ExpenseTransaction) {
+        this.compositeDisposable.add(
+            this.localDataUseCase.deleteTransactionByID(transaction)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

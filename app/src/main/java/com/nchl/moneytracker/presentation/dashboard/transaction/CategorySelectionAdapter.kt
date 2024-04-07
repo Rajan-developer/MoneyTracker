@@ -1,11 +1,8 @@
-package com.nchl.moneytracker.presentation.dashboard.home
+package com.nchl.moneytracker.presentation.dashboard.transaction
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.OvalShape
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,8 +66,8 @@ class CategorySelectionAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateAll(mobileNfcPayments: MutableList<ExpenseCategory>) {
-        this.categories = mobileNfcPayments
+    fun updateAll(selectableCategories: MutableList<ExpenseCategory>) {
+        this.categories = selectableCategories
         notifyDataSetChanged()
     }
 

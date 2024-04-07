@@ -1,17 +1,25 @@
 package com.nchl.moneytracker.framework.dataSource
 
 import android.content.ContentValues
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.nchl.moneytracker.MoneyTrackerApplication
 import com.nchl.moneytracker.data.dataSource.db.AppDatabase
 import com.nchl.moneytracker.data.dataSource.db.LocalDatabaseSource
 import com.nchl.moneytracker.domain.model.*
+import com.nchl.moneytracker.presentation.model.CategorySum
 import com.nchl.moneytracker.presentation.model.ExpenseCategory
 import com.nchl.moneytracker.presentation.model.ExpenseTransaction
+import com.nchl.moneytracker.presentation.utils.AppUtility
+import com.nchl.moneytracker.presentation.utils.AppUtility.dateStringToLong
+import com.nchl.moneytracker.presentation.utils.AppUtility.stringToDate
 import com.nchl.moneytracker.presentation.utils.log.Logger
-import global.citytech.easydroid.core.utils.Jsons
 import io.reactivex.Observable
+import java.text.SimpleDateFormat
+import java.util.*
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 class LocalDatabaseSourceImpl : LocalDatabaseSource {
 
     private val logger = Logger(LocalDatabaseSourceImpl::class.java.simpleName)
@@ -129,7 +137,6 @@ class LocalDatabaseSourceImpl : LocalDatabaseSource {
         }
     }
 
-
     override fun addTransaction(transaction: ExpenseTransaction): Observable<Boolean> {
         return Observable.fromCallable {
             val contentValues = ContentValues()
@@ -158,8 +165,8 @@ class LocalDatabaseSourceImpl : LocalDatabaseSource {
                 transaction.time
             )
             contentValues.put(
-                    Transaction.DESCRIPTION,
-            transaction.description
+                Transaction.DESCRIPTION,
+                transaction.description
             )
             contentValues.put(
                 Transaction.AMOUNT,
@@ -171,4 +178,108 @@ class LocalDatabaseSourceImpl : LocalDatabaseSource {
             true
         }
     }
+
+    override fun updateTransactionById(transaction: ExpenseTransaction): Observable<Boolean> {
+
+        return Observable.fromCallable {
+            AppDatabase.getInstance(MoneyTrackerApplication.INSTANCE).getTransactionDao()
+                .updateTransaction(
+                    transaction.categoryId,
+                    transaction.categoryName,
+                    transaction.categoryType,
+                    transaction.date?.let { stringToDate(it, "d/M/yyyy") },
+                    transaction.time,
+                    transaction.transactionAmount,
+                    transaction.description,
+                    transaction.id
+                )
+            true
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun stringToDate(dateString: String, format: String): Date {
+        println("Original date : " + dateString)
+        val formatter = SimpleDateFormat(format, Locale.getDefault())
+        var date: Date
+        try {
+            date = formatter.parse(dateString)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            date = AppUtility.stringToDate(dateString, "EEE MMM dd HH:mm:ss zzz yyyy")
+        }
+        println("Converted date : " + date)
+        return date
+    }
+
+    override fun deleteTransactionByID(transaction: ExpenseTransaction): Observable<Boolean> {
+        return Observable.fromCallable {
+            AppDatabase.getInstance(MoneyTrackerApplication.INSTANCE).getTransactionDao()
+                .deleteById(transaction.id.toLong())
+            true
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun getTransactionByDate(transactionDate: String): Observable<List<Transaction>> {
+
+        var date = stringToDate(transactionDate, "d/M/yyyy")
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar[Calendar.DAY_OF_MONTH] = 1
+        val startDateOfMonth = calendar.time
+        calendar[Calendar.DAY_OF_MONTH] = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val lastDateOfMonth = calendar.time
+
+        return Observable.fromCallable {
+            AppDatabase.getInstance(MoneyTrackerApplication.INSTANCE).getTransactionDao()
+                .getTransactionByDate(
+                    dateStringToLong(startDateOfMonth.toString()),
+                    dateStringToLong(lastDateOfMonth.toString())
+                )
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun getTotalIncomeByDate(transactionDate: String, categoryType:String): Observable<Double> {
+        var date = stringToDate(transactionDate, "d/M/yyyy")
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar[Calendar.DAY_OF_MONTH] = 1
+        val startDateOfMonth = calendar.time
+        calendar[Calendar.DAY_OF_MONTH] = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val lastDateOfMonth = calendar.time
+        return Observable.fromCallable {
+            AppDatabase.getInstance(MoneyTrackerApplication.INSTANCE).getTransactionDao()
+                .getTotalSumTransactionByDate(
+                    categoryType,
+                    dateStringToLong(startDateOfMonth.toString()),
+                    dateStringToLong(lastDateOfMonth.toString())
+                )
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun getTransactionSumByCategory(
+        transactionDate: String,
+        categoryType: String
+    ): Observable<List<CategorySum>> {
+        var date = stringToDate(transactionDate, "d/M/yyyy")
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar[Calendar.DAY_OF_MONTH] = 1
+        val startDateOfMonth = calendar.time
+        calendar[Calendar.DAY_OF_MONTH] = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val lastDateOfMonth = calendar.time
+        return Observable.fromCallable {
+            AppDatabase.getInstance(MoneyTrackerApplication.INSTANCE).getTransactionDao()
+                .getTransactionSumByCategory(
+                    categoryType,
+                    dateStringToLong(startDateOfMonth.toString()),
+                    dateStringToLong(lastDateOfMonth.toString())
+                )
+        }
+    }
+
+
 }

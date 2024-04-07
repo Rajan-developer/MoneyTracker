@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <LinearLayout
+          android:paddingLeft="16dp"
+          android:id="@+id/layout_date_picker"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Select Date"></TextView>
+
+          <RelativeLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/rounded_button_bg"
+              android:gravity="center"
+              android:paddingHorizontal="10dp"
+              android:paddingVertical="8dp">
+
+              <ImageView
+                  android:id="@+id/dateIcon"
+                  android:layout_width="30dp"
+                  android:layout_height="30dp"
+                  android:layout_alignParentLeft="true"
+                  android:src="@drawable/ic_calendar"></ImageView>
+
+              <TextView
+                  android:id="@+id/selectedDate"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerInParent="true"
+                  android:layout_marginLeft="5dp"
+                  android:layout_toEndOf="@+id/dateIcon"
+                  android:text="April 2022"
+                  android:textColor="@color/white"
+                  android:textSize="16sp"
+                  android:textStyle="bold"></TextView>
+
+
+          </RelativeLayout>
+      </LinearLayout>
+
+      <com.google.android.material.tabs.TabLayout
+          android:id="@+id/tabLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:tabGravity="fill"
+          app:tabMode="fixed" />
+
+      <androidx.viewpager.widget.ViewPager
+          android:paddingHorizontal="16dp"
+          android:id="@+id/viewPager"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+  </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

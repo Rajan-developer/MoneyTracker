@@ -1,11 +1,13 @@
-package com.nchl.moneytracker.presentation.dashboard.home
+package com.nchl.moneytracker.presentation.dashboard.transaction
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProviders
 import com.nchl.moneytracker.BR
@@ -31,6 +33,7 @@ class TransactionDetailActivity :
     private var categorySelectionDialog: CategorySelectionDialog? = null
 
     companion object {
+        const val REQUEST_CODE = 9090
         const val TITLE = "title"
         const val TRANSACTION = "transaction"
         const val EDITING = "editing"
@@ -76,14 +79,19 @@ class TransactionDetailActivity :
         super.onResume()
 
         if (!isEditing) {
+            binding.ivDelete.visibility = View.GONE
             binding.expenseRadioButton.isChecked = true
             getViewModel().setSelectedCategoryType("0")
             getViewModel().setSelectedDate()
             getViewModel().setSelectedTime()
         } else {
+            binding.ivDelete.visibility = View.VISIBLE
             setExpenseCategory()
             getViewModel().expenseTransaction.value?.date?.let { getViewModel().setSelectedDate(it) }
             getViewModel().expenseTransaction.value?.time?.let { getViewModel().setSelectedTime(it) }
+            binding.textInputEtCategoryName.setText(getViewModel().expenseTransaction.value?.categoryName.toString())
+            binding.textInputEtTransactionAmount.setText(getViewModel().expenseTransaction.value?.transactionAmount.toString())
+            binding.textInputEtTransactionRemark.setText(getViewModel().expenseTransaction.value?.description.toString())
         }
 
     }
@@ -129,7 +137,8 @@ class TransactionDetailActivity :
             getViewModel().validateALlTransactionField(
                 binding.textInputEtCategoryName.text.toString(),
                 binding.textInputEtTransactionAmount.text.toString(),
-                binding.textInputEtTransactionRemark.text.toString()
+                binding.textInputEtTransactionRemark.text.toString(),
+                isEditing
             )
         }
 
@@ -139,6 +148,14 @@ class TransactionDetailActivity :
 
         binding.ivBack.setOnClickListener {
             finish()
+        }
+
+        binding.ivDelete.setOnClickListener {
+            getViewModel().expenseTransaction.value?.let { it1 ->
+                getViewModel().deleteTransactionByID(
+                    it1
+                )
+            }
         }
     }
 
@@ -166,7 +183,7 @@ class TransactionDetailActivity :
                     category.name!!,
                     category.type!!,
                     category.icon!!,
-                    category.id.toString(),
+                    category.id,
                 )
             } as ArrayList<ExpenseCategory>
         }
@@ -176,6 +193,12 @@ class TransactionDetailActivity :
         }
 
         getViewModel().isTransactionInserted.observe(this) {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
+
+        getViewModel().isTransactionUpdate.observe(this) {
+            setResult(Activity.RESULT_OK)
             finish()
         }
     }

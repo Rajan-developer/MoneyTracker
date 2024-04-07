@@ -1,4 +1,4 @@
-package com.nchl.moneytracker.presentation.dashboard.home
+package com.nchl.moneytracker.presentation.dashboard.transaction
 
 import android.content.Context
 import android.os.Bundle
