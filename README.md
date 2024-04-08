@@ -29,3 +29,42 @@ With its user-centric design and robust features, the Money Tracker application 
 **Phone Number**  : 9860262259
 **Password**  : Test@1234
 **OTP** : 123456
+
+## Clean Architecture
+Clean Architecture is a software design approach introduced by Robert C. Martin, also known as Uncle Bob. It emphasizes separation of concerns and modularity by organizing code into layers, each with a specific responsibility.
+
+## Project Structure
+```
+│
+├── data                    // Data layer
+│   ├── local               // Local data sources (e.g., Room database)
+│   ├── remote              // Remote data sources (e.g., Retrofit API service)
+│   └── repository          // Repository pattern to provide data to the domain layer
+│
+├── domain                  // Domain layer (business logic)
+│   ├── model               // Domain models/entities
+│   ├── repository          // Interfaces defining data operations
+│   └── usecase             // Use cases (interactors) orchestrating business logic
+│
+├── presentation            // Presentation layer (UI)
+│   ├── di                  // Dependency Injection (e.g., Dagger or Hilt modules)
+│   ├── ui                  // UI components (Fragments, Activities)
+│   │   ├── feature         // Feature-specific UI components
+│   │   └── shared          // Shared UI components (e.g., custom views, adapters)
+│   ├── viewmodel           // ViewModels for UI logic
+│   └── utils               // Utility classes and extensions for UI
+│
+└── utils                   // Utility classes and extensions for the entire application
+```
+
+**data**: This layer contains implementations for data sources (local and remote), as well as repository interfaces that define how data is accessed and manipulated. It's responsible for data retrieval and persistence.
+
+**domain**: The domain layer contains business logic, including domain models/entities, repository interfaces defining data operations, and use cases (interactors) that encapsulate complex business logic.
+
+**presentation**: This layer represents the UI part of the application and follows the MVVM architecture pattern. It includes Dependency Injection modules, UI components (Fragments, Activities), ViewModels for UI logic, and utility classes/extensions for UI-related tasks.
+
+**utils**: Utility classes and extensions that can be used across different layers of the application for common tasks such as date formatting, validation, etc.
+
+This structure helps in maintaining a clear separation of concerns, making the codebase easier to understand, test, and maintain. Each layer has its specific responsibilities and dependencies, promoting modularity and scalability.
+
+
