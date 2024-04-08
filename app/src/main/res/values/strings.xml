@@ -19,6 +19,7 @@
     <!--activity_login-->
     <string name="welcome_txt">Welcome Back! Please SignIn to Continue</string>
     <string name="email">Email</string>
+    <string name="phone">Phone</string>
     <string name="password">Password</string>
     <string name="sign_in">Sign In</string>
     <string name="dont_have_account_sign_up">Don\'t have an account? </string>

@@ -39,6 +39,9 @@ class DashViewModel(private val context: Application) : BaseAndroidViewModel(con
     val selectedActualChartDate = MutableLiveData<String>()
     val incomeChartList by lazy { MutableLiveData<MutableList<CategorySum>>() }
     val expenseChartList by lazy { MutableLiveData<MutableList<CategorySum>>() }
+    val totalIncomeOfTransaction by lazy { MutableLiveData<Double>() }
+    val totalExpenseOfTransaction by lazy { MutableLiveData<Double>() }
+    val totalSavingOfTransaction by lazy { MutableLiveData<Double>() }
 
     var localDataUseCase: LocalDataUseCase = LocalDataUseCase(
         LocalRepositoryImpl(
@@ -310,6 +313,27 @@ class DashViewModel(private val context: Application) : BaseAndroidViewModel(con
                             totalExpense.value = it
                         } else {
                             totalIncome.value = it
+                        }
+                    },
+                    {
+                        Logger.getLogger(TAG)
+                            .debug("Transaction fetch ${it.message}................")
+                    }
+                )
+        )
+    }
+
+    fun getTotalSumOfTransactionByCategory(categoryType: String) {
+        this.compositeDisposable.add(
+            this.localDataUseCase.getTotalSumOfTransactionByCategory(categoryType)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        if (categoryType == "0") {
+                            totalExpenseOfTransaction.value = it
+                        } else {
+                            totalIncomeOfTransaction.value = it
                         }
                     },
                     {

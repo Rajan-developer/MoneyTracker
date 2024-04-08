@@ -23,6 +23,8 @@
     <color name="expensesColor">#DC3545</color>
     <color name="incomeColor">#17B169</color>
 
+    <color name="default_shadow_color">#88757575</color>
+
     <color name="text_grey">#6d6e71</color>
     <color name="text_light_grey">#B9BABF</color>
 

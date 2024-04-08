@@ -20,4 +20,9 @@
 
     <dimen name="pinpad_btn_height">60dp</dimen>
     <dimen name="pinpad_abort_btn_height">72dp</dimen>
+
+
+    <dimen name="default_corner_radius">4dp</dimen>
+    <dimen name="default_shadow_radius">4dp</dimen>
+
 </resources>

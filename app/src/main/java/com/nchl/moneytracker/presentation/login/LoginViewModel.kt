@@ -1,7 +1,9 @@
 package com.nchl.moneytracker.presentation.login
 
 import android.app.Application
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import com.nchl.moneytracker.data.api.ApiClient
 import com.nchl.moneytracker.data.api.ApiConstants
@@ -25,15 +27,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@RequiresApi(Build.VERSION_CODES.O)
 class LoginViewModel(private val context: Application) : BaseAndroidViewModel(context) {
 
     private val TAG = Logger(LoginViewModel::class.java.name).toString()
     val loginProcessStart by lazy { MutableLiveData<Boolean>() }
 
-    fun validateLoginCredential(email: String, password: String) {
-        if (email.isNullOrEmpty() && password.isNullOrEmpty()) {
+    fun validateLoginCredential(phoneNumber: String, password: String) {
+        if (phoneNumber.isNullOrEmpty() && password.isNullOrEmpty()) {
             context.showToast("please fill in all the details", Toast.LENGTH_SHORT)
-        } else if (AppUtility.isValidEmail(context, email)) {
+        } else if (AppUtility.isValidPhoneNumber(context, phoneNumber)) {
             if (password.isNullOrEmpty()) {
                 context.showToast("password cannot be empty", Toast.LENGTH_SHORT)
             } else if (!context.hasInternetConnection()) {

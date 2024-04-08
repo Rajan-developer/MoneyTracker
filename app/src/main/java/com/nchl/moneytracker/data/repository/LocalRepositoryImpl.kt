@@ -29,4 +29,5 @@ class LocalRepositoryImpl(
     override fun getTransactionByDate(transactionDate: String): Observable<List<Transaction>>  = localDatabaseSource.getTransactionByDate(transactionDate)
     override fun getTotalIncomeByDate(transactionDate: String,categoryType:String): Observable<Double>  = localDatabaseSource.getTotalIncomeByDate(transactionDate,categoryType)
     override fun getTransactionSumByCategory(transactionDate: String,categoryType:String): Observable<List<CategorySum>>  = localDatabaseSource.getTransactionSumByCategory(transactionDate,categoryType)
+    override fun getTotalSumOfTransactionByCategory(categoryType:String): Observable<Double>  = localDatabaseSource.getTotalSumOfTransactionByCategory(categoryType)
 }

@@ -241,7 +241,10 @@ class LocalDatabaseSourceImpl : LocalDatabaseSource {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun getTotalIncomeByDate(transactionDate: String, categoryType:String): Observable<Double> {
+    override fun getTotalIncomeByDate(
+        transactionDate: String,
+        categoryType: String
+    ): Observable<Double> {
         var date = stringToDate(transactionDate, "d/M/yyyy")
         val calendar = Calendar.getInstance()
         calendar.time = date
@@ -277,6 +280,16 @@ class LocalDatabaseSourceImpl : LocalDatabaseSource {
                     categoryType,
                     dateStringToLong(startDateOfMonth.toString()),
                     dateStringToLong(lastDateOfMonth.toString())
+                )
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun getTotalSumOfTransactionByCategory(categoryType: String): Observable<Double> {
+        return Observable.fromCallable {
+            AppDatabase.getInstance(MoneyTrackerApplication.INSTANCE).getTransactionDao()
+                .getTotalSumOfTransactionByCategory(
+                    categoryType,
                 )
         }
     }

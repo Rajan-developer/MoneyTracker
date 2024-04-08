@@ -24,4 +24,5 @@ class LocalDataUseCase(private val localRepository: LocalRepository) {
      fun getTransactionByDate(transactionDate: String): Observable<List<Transaction>>  = localRepository.getTransactionByDate(transactionDate)
      fun getTotalIncomeByDate(transactionDate: String, categoryType: String): Observable<Double>  = localRepository.getTotalIncomeByDate(transactionDate,categoryType)
      fun getTransactionSumByCategory(transactionDate: String, categoryType: String): Observable<List<CategorySum>>  = localRepository.getTransactionSumByCategory(transactionDate,categoryType)
+     fun getTotalSumOfTransactionByCategory(categoryType: String): Observable<Double>  = localRepository.getTotalSumOfTransactionByCategory(categoryType)
 }

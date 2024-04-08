@@ -22,4 +22,5 @@ interface LocalDatabaseSource {
     fun getTransactionByDate(transactionDate: String): Observable<List<Transaction>>
     fun getTotalIncomeByDate(transactionDate: String,categoryType:String): Observable<Double>
     fun getTransactionSumByCategory(transactionDate: String,categoryType:String): Observable<List<CategorySum>>
+    fun getTotalSumOfTransactionByCategory(categoryType:String): Observable<Double>
 }

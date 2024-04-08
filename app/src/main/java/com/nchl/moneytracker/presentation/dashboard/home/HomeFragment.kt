@@ -72,6 +72,13 @@ class HomeFragment : AppBaseFragment(), SearchTransactionAdapter.Listener {
         getViewModel().transactionListByDate.observe(viewLifecycleOwner) {
             adapter.update(it)
             binding.tvTransactionCount.text = it.size.toString()
+            if(it.size>0){
+                binding.rvSearchTransaction.visibility = View.VISIBLE
+                binding.noData.visibility = View.GONE
+            }else{
+                binding.rvSearchTransaction.visibility = View.GONE
+                binding.noData.visibility = View.VISIBLE
+            }
         }
 
         getViewModel().totalIncome.observe(viewLifecycleOwner) { income ->

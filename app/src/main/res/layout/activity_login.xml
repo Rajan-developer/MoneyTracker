@@ -53,27 +53,28 @@
                     android:text="@string/welcome_txt"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/layout_email"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_phoneNumber"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_email"
+                    android:id="@+id/layout_phoneNumber"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:hint="@string/email"
+                    android:hint="@string/phone"
                     app:layout_constraintBottom_toTopOf="@+id/layout_password"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:startIconDrawable="@drawable/ic_email">
+                    app:startIconDrawable="@drawable/ic_phone">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_email"
-                        android:textSize="14sp"
+                        android:id="@+id/et_phoneNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp" />
+                        android:layout_height="50dp"
+                        android:inputType="phone"
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -94,8 +95,8 @@
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:textSize="14sp"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -109,9 +110,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/layout_password" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginTop="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_login">
@@ -130,8 +131,8 @@
                         android:id="@+id/tv_sign_up"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
                         android:text="@string/sign_up"
+                        android:textColor="@color/colorPrimary"
                         app:layout_constraintStart_toEndOf="@id/tv_dont_have_account"
                         app:layout_constraintTop_toTopOf="parent" />
 

@@ -42,6 +42,10 @@ interface TransactionDao {
     @Query("SELECT SUM(transaction_amount) FROM transactions WHERE category_type = :categoryType AND date>= :fromDate AND date <= :toDate")
     fun getTotalSumTransactionByDate(categoryType: String, fromDate: Long, toDate: Long): Double
 
+    @Query("SELECT SUM(transaction_amount) FROM transactions WHERE category_type = :categoryType")
+    fun getTotalSumOfTransactionByCategory(categoryType: String): Double
+
+
     @Update
     fun update(transactions: Transaction): Int
 

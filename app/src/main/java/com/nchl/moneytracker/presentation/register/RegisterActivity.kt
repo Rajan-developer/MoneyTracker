@@ -2,8 +2,10 @@ package com.nchl.moneytracker.presentation.register
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.nchl.moneytracker.BR
@@ -13,6 +15,7 @@ import com.nchl.moneytracker.presentation.base.AppBaseActivity
 import com.nchl.moneytracker.presentation.login.LoginActivity
 import com.nchl.moneytracker.presentation.utils.log.Logger
 
+@RequiresApi(Build.VERSION_CODES.O)
 class RegisterActivity : AppBaseActivity<ActivityRegisterBinding, RegisterViewModel>() {
 
     private val logger = Logger(RegisterActivity::class.java.name)

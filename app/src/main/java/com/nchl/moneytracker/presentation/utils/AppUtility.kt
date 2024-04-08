@@ -38,6 +38,24 @@ object AppUtility {
 
     }
 
+    fun isValidPhoneNumber(context: Context, phoneNumber: String): Boolean {
+        var isValidPhoneNumber= false;
+        return if (phoneNumber.isNullOrEmpty()) {
+            context.showToast("Phone number cannot be empty", Toast.LENGTH_SHORT)
+            isValidPhoneNumber
+        } else {
+
+            if (phoneNumber.length < 10 || phoneNumber.length > 10) {
+                isValidPhoneNumber = false
+                context.showToast("Phone number must be 10 digit", Toast.LENGTH_SHORT)
+            } else {
+                isValidPhoneNumber = true
+            }
+            return isValidPhoneNumber
+        }
+
+    }
+
     fun drawableToByteArray(context: Context, drawable: Drawable): ByteArray {
         val bitmap = drawableToBitmap(drawable)
         val outputStream = ByteArrayOutputStream()
@@ -68,6 +86,15 @@ object AppUtility {
 
         // Combine RGB values into a single color integer
         return Color.rgb(r, g, b)
+    }
+
+    fun generateRandomDigits(length: Int): String {
+        val random = java.util.Random()
+        val sb = StringBuilder(length)
+        repeat(length) {
+            sb.append(random.nextInt(10)) // Append a random digit (0-9)
+        }
+        return sb.toString()
     }
 
     fun getCurrentDate(): String {
