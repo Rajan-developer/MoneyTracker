@@ -19,11 +19,11 @@ import com.nchl.moneytracker.presentation.dashboard.DashViewModel
 import com.nchl.moneytracker.presentation.model.ExpenseCategory
 
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+@RequiresApi(Build.VERSION_CODES.O)
 class CategoryFragment : AppBaseFragment(), EditCategoryDialog.EditCategoryDialogListener {
 
     private lateinit var binding: FragmentCategoryBinding
-    private val tabArray: ArrayList<String> = arrayListOf()
+    private var tabArray: ArrayList<String> = arrayListOf()
     private lateinit var editCategoryDialog: EditCategoryDialog
 
     override fun getLayoutId(): Int = R.layout.fragment_category
@@ -58,7 +58,7 @@ class CategoryFragment : AppBaseFragment(), EditCategoryDialog.EditCategoryDialo
         initializeCategoryTabName()
         getViewModel().getAllCategoryFromDbTable()
 
-        binding.viewPager.offscreenPageLimit = 2
+        //binding.viewPager.offscreenPageLimit = 2
         binding.viewPager.addOnPageChangeListener(TabLayoutOnPageChangeListener(binding.tabLayout))
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -90,6 +90,7 @@ class CategoryFragment : AppBaseFragment(), EditCategoryDialog.EditCategoryDialo
     }
 
     private fun initializeCategoryTabName() {
+        tabArray = arrayListOf()
         tabArray.add("Expense")
         tabArray.add("Income")
     }
@@ -117,7 +118,9 @@ class CategoryFragment : AppBaseFragment(), EditCategoryDialog.EditCategoryDialo
 }
 
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+
+
+@RequiresApi(Build.VERSION_CODES.O)
 class DynamicFragmentAdapter internal constructor(
     fm: FragmentManager?,
     private val mNumOfTabs: Int

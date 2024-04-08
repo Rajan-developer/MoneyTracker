@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MoneyTrackerApplication"
@@ -16,7 +16,7 @@
         android:theme="@style/Theme.MoneyTracker"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.dashboard.DashActivity"
+            android:name=".presentation.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,17 +25,20 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".presentation.login.LoginActivity"
+            android:exported="true" />
+        <activity
             android:name=".presentation.register.RegisterActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.otp.OtpActivity"
-            android:exported="true">
-        </activity>
-<!--        <activity-->
-<!--            android:name=".presentation.dashboard.DashActivity"-->
-<!--            android:exported="true">-->
-<!--        </activity>-->
+            android:exported="true" />
+        <activity
+            android:name=".presentation.dashboard.transaction.TransactionDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.dashboard.DashActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

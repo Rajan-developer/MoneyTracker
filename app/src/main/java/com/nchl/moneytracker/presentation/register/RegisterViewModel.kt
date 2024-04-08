@@ -1,13 +1,17 @@
 package com.nchl.moneytracker.presentation.register
 
 import android.app.Application
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import com.nchl.moneytracker.data.api.ApiClient
 import com.nchl.moneytracker.data.api.ApiConstants
 import com.nchl.moneytracker.data.api.ApiInterface
 import com.nchl.moneytracker.data.model.register.RegisterRequest
 import com.nchl.moneytracker.data.model.register.RegisterResponse
+import com.nchl.moneytracker.presentation.otp.sendOtpByEmail
+import com.nchl.moneytracker.presentation.utils.AppUtility.generateRandomDigits
 import com.nchl.moneytracker.presentation.utils.AppUtility.isValidEmail
 import com.nchl.moneytracker.presentation.utils.exception.TrackerError
 import com.nchl.moneytracker.presentation.utils.exception.TrackerException
@@ -25,10 +29,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@RequiresApi(Build.VERSION_CODES.O)
 class RegisterViewModel(private val context: Application) : BaseAndroidViewModel(context) {
 
     private val TAG = Logger(RegisterViewModel::class.java.name).toString()
     val registerProcessStart by lazy { MutableLiveData<Boolean>() }
+
 
     fun validateRegisterCredential(
         username: String,
@@ -36,23 +42,24 @@ class RegisterViewModel(private val context: Application) : BaseAndroidViewModel
         password: String,
         confirmPassword: String
     ) {
-        if (username.isNullOrEmpty() && email.isNullOrEmpty() && password.isNullOrEmpty() && confirmPassword.isNullOrEmpty()) {
-            context.showToast("please fill in all the details", Toast.LENGTH_SHORT)
-        } else if (username.isNullOrEmpty()) {
-            context.showToast("username cannot be empty", Toast.LENGTH_SHORT)
-        } else if (isValidEmail(context,email)) {
-            if (password.isNullOrEmpty()) {
-                context.showToast("password cannot be empty", Toast.LENGTH_SHORT)
-            } else if (confirmPassword.isNullOrEmpty()) {
-                context.showToast("confirm password cannot be empty", Toast.LENGTH_SHORT)
-            } else if (password != confirmPassword) {
-                context.showToast("password doesn't matched", Toast.LENGTH_SHORT)
-            } else if (!context.hasInternetConnection()) {
-                context.showToast("No internet connection", Toast.LENGTH_SHORT)
-            } else {
-                registerProcessStart.value = true
-            }
-        }
+//        if (username.isNullOrEmpty() && email.isNullOrEmpty() && password.isNullOrEmpty() && confirmPassword.isNullOrEmpty()) {
+//            context.showToast("please fill in all the details", Toast.LENGTH_SHORT)
+//        } else if (username.isNullOrEmpty()) {
+//            context.showToast("username cannot be empty", Toast.LENGTH_SHORT)
+//        } else if (isValidEmail(context,email)) {
+//            if (password.isNullOrEmpty()) {
+//                context.showToast("password cannot be empty", Toast.LENGTH_SHORT)
+//            } else if (confirmPassword.isNullOrEmpty()) {
+//                context.showToast("confirm password cannot be empty", Toast.LENGTH_SHORT)
+//            } else if (password != confirmPassword) {
+//                context.showToast("password doesn't matched", Toast.LENGTH_SHORT)
+//            } else if (!context.hasInternetConnection()) {
+//                context.showToast("No internet connection", Toast.LENGTH_SHORT)
+//            } else {
+//                registerProcessStart.value = true
+//            }
+//        }
+        registerProcessStart.value = true
     }
 
     fun register(username: String, email: String, password: String, confirmPassword: String) {
@@ -65,6 +72,8 @@ class RegisterViewModel(private val context: Application) : BaseAndroidViewModel
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onNext, this::onError)
         )
+
+        //send otp
     }
 
 
@@ -72,37 +81,40 @@ class RegisterViewModel(private val context: Application) : BaseAndroidViewModel
         emitter: ObservableEmitter<RegisterResponse>,
         registerRequest: RegisterRequest
     ) {
-        val retrofitService = ApiClient().getRetrofit(ApiConstants.BASE_URL)
-            .create(ApiInterface::class.java)
-        retrofitService.register(registerRequest).enqueue(object :
-            Callback<Any> {
-            override fun onResponse(
-                call: Call<Any>,
-                response: Response<Any>
-            ) {
-                if (response.isSuccessful) {
-                    val registerResponse: com.nchl.moneytracker.data.model.Response =
-                        Jsons.fromJsonToObj(
-                            response.body().toString(),
-                            com.nchl.moneytracker.data.model.Response::class.java
-                        )
-                    if (registerResponse.data != null) {
-                        prepareRegisterResponse(emitter, registerResponse.data as Any)
-                    } else {
-                        if (registerResponse.code == "401")
-                            emitter.onError(TrackerException(TrackerError.USER_REGSITER_FAILED))
-                        else
-                            emitter.onError(Exception("Error Code :: ${registerResponse.code}. ${registerResponse.message}"))
-                    }
-                } else {
-                    //emitter.onError(TrackerException(TrackerError.USER_REGSITER_FAILED))
-                }
-            }
 
-            override fun onFailure(call: Call<Any>, t: Throwable) {
-                emitter.onError(TrackerException(TrackerError.USER_REGSITER_FAILED))
-            }
-        })
+        sendOtpByEmail("shrestharajan162@gmail.com",generateRandomDigits(6))
+
+//        val retrofitService = ApiClient().getRetrofit(ApiConstants.BASE_URL)
+//            .create(ApiInterface::class.java)
+//        retrofitService.register(registerRequest).enqueue(object :
+//            Callback<Any> {
+//            override fun onResponse(
+//                call: Call<Any>,
+//                response: Response<Any>
+//            ) {
+//                if (response.isSuccessful) {
+//                    val registerResponse: com.nchl.moneytracker.data.model.Response =
+//                        Jsons.fromJsonToObj(
+//                            response.body().toString(),
+//                            com.nchl.moneytracker.data.model.Response::class.java
+//                        )
+//                    if (registerResponse.data != null) {
+//                        prepareRegisterResponse(emitter, registerResponse.data as Any)
+//                    } else {
+//                        if (registerResponse.code == "401")
+//                            emitter.onError(TrackerException(TrackerError.USER_REGSITER_FAILED))
+//                        else
+//                            emitter.onError(Exception("Error Code :: ${registerResponse.code}. ${registerResponse.message}"))
+//                    }
+//                } else {
+//                    //emitter.onError(TrackerException(TrackerError.USER_REGSITER_FAILED))
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<Any>, t: Throwable) {
+//                emitter.onError(TrackerException(TrackerError.USER_REGSITER_FAILED))
+//            }
+//        })
 
         emitter.onComplete()
     }
