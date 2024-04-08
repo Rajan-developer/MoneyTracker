@@ -24,3 +24,8 @@ By integrating Firebase Authentication, we prioritize user security and streamli
 4. **Profile:** Users can access personal information, including total income and expenses accumulated over time, as well as details such as email, name, and address.
 
 With its user-centric design and robust features, the Money Tracker application empowers individuals to take control of their financial well-being with ease and confidence.
+
+## Defualt credential for app Login
+**Phone Number**  : 9860262259
+**Password**  : Test@1234
+**OTP** : 123456
